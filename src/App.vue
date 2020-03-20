@@ -10,6 +10,16 @@ export default {
     return {
       message: "Hello, Chat-App!!"
     };
+  },
+  created() {
+    const socket = io.connect("/", {
+      path: "/socket.io"
+    });
+
+    socket.on("hello", data => {
+      console.log(data); // Hello, Client!
+      socket.emit("bye", "Bye, Server!");
+    });
   }
 };
 </script>
