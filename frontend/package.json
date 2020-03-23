@@ -1,0 +1,23 @@
+{
+  "name": "chat-app",
+  "version": "1.0.0",
+  "description": "chat-app frontend",
+  "scripts": {
+    "dev": "webpack-dev-server --open --content-base dist"
+  },
+  "author": "JK",
+  "license": "MIT",
+  "dependencies": {
+    "ant-design-vue": "1.4.12",
+    "vue": "2.6.11"
+  },
+  "devDependencies": {
+    "css-loader": "3.4.2",
+    "vue-loader": "15.9.1",
+    "vue-style-loader": "4.1.2",
+    "vue-template-compiler": "2.6.11",
+    "webpack": "4.42.0",
+    "webpack-cli": "3.3.11",
+    "webpack-dev-server": "3.10.3"
+  }
+}
