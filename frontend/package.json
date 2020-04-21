@@ -3,12 +3,13 @@
   "version": "1.0.0",
   "description": "chat-app frontend",
   "scripts": {
-    "dev": "webpack-dev-server --open --content-base dist"
+    "dev": "webpack-dev-server --open --content-base dist --hot"
   },
   "author": "JK",
   "license": "MIT",
   "dependencies": {
     "ant-design-vue": "1.4.12",
+    "uuid4": "^1.1.4",
     "vue": "2.6.11"
   },
   "devDependencies": {
