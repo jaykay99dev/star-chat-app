@@ -3,9 +3,9 @@
     <div class="message-item">
       <div class="message-container">
         <chat-message
-          v-for="chatData in chatDataList"
-          :key="chatData.key"
-          :chat-data="chatData"
+          v-for="chatMessage in chatMessages"
+          :key="chatMessage.key"
+          :chat-message="chatMessage"
         ></chat-message>
       </div>
     </div>
@@ -16,7 +16,6 @@
 </template>
 
 <script>
-import uuid from "uuid4";
 import ChatMessage from "./ChatMessage";
 import ChatInput from "./ChatInput";
 
@@ -25,19 +24,10 @@ export default {
     ChatMessage,
     ChatInput,
   },
-  data() {
-    return {
-      chatDataList: [],
-    };
-  },
-  created() {
-    this.$root.socket.on("receive", (data) => {
-      const {
-        data: { username, message },
-      } = data;
-
-      this.chatDataList.push({ key: uuid(), username, message });
-    });
+  computed: {
+    chatMessages() {
+      return this.$store.state.chatMessages;
+    },
   },
 };
 </script>

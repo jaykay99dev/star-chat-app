@@ -1,4 +1,3 @@
-// const uuid = require("uuid4");
 const path = require("path");
 const express = require("express");
 const morgan = require("morgan");
@@ -23,11 +22,13 @@ io.on("connection", (socket) => {
   const ip = req.connection.remoteAddress;
 
   console.log("new client", ip, socket.id);
-  users[socket.id] = {};
 
   socket.on("disconnect", () => {
     console.log("close client", ip, socket.id);
     delete users[socket.id];
+
+    // 다른 사용자들에 나간 사용자의 socket id를 전달한다
+    socket.broadcast.emit("userCameOut", socket.id);
   });
 
   socket.on("error", (err) => {
@@ -35,20 +36,20 @@ io.on("connection", (socket) => {
   });
 
   // 사용자가 처음 chat-app에 들어올때 수신한다
-  socket.on("enterChatApp", (username) => {
-    const userData = users[socket.id];
-    userData.username = username;
+  socket.on("enterChatApp", (userData) => {
+    users[socket.id] = {
+      username: userData.username,
+    };
 
     // 다른 사용자들에게 새로운 사용자가 입장했음을 알린다
-    socket.broadcast.emit("userCameIn", userData);
+    socket.broadcast.emit("userCameIn", [socket.id, users[socket.id]]);
 
     // 입장한 사용자에게 사용자 목록을 전송한다
     socket.emit("iCameIn", users);
   });
 
   // 사용자가 메시지를 보낼 때 수신한다
-  socket.on("send", (data) => {
-    // socket.server.emit("receive", { key: uuid(), data });
-    socket.server.emit("receive", { data });
+  socket.on("sendMessage", (userMessage) => {
+    socket.server.emit("receiveMessage", userMessage);
   });
 });

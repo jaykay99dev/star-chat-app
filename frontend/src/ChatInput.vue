@@ -19,8 +19,8 @@ export default {
   },
   methods: {
     onSearch(value) {
-      this.$root.socket.emit("send", {
-        username: this.$root.username,
+      this.$store.state.socket.emit("sendMessage", {
+        username: this.$store.state.user.username,
         message: value,
       });
       this.value = "";

@@ -8,7 +8,18 @@
       :mask="false"
     >
       <div>
-        <p>{{ $root.username }} (ME)</p>
+        <p>{{ user.username }} (ME)</p>
+        <a-list itemLayout="horizontal" :dataSource="users">
+          <a-list-item slot="renderItem" slot-scope="user">
+            <a-list-item-meta description="Hello, Chat-App!">
+              <span slot="title">{{ user.username }}</span>
+              <a-avatar
+                slot="avatar"
+                src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+              />
+            </a-list-item-meta>
+          </a-list-item>
+        </a-list>
       </div>
       <a-button class="menu-btn" @click="onClickMenu">USERS</a-button>
     </a-drawer>
@@ -21,6 +32,14 @@ export default {
     return {
       visible: true,
     };
+  },
+  computed: {
+    user() {
+      return this.$store.state.user;
+    },
+    users() {
+      return this.$store.getters.users;
+    },
   },
   methods: {
     onClickMenu() {

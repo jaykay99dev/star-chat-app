@@ -19,8 +19,10 @@
 import ChatSpace from "./ChatSpace";
 import UserList from "./UserList";
 import ChatMain from "./ChatMain";
+import store from "./store";
 
 export default {
+  store,
   components: {
     ChatSpace,
     UserList,
@@ -28,9 +30,7 @@ export default {
   },
   data() {
     return {
-      socket: null,
       isEnter: false,
-      username: "",
     };
   },
   methods: {},
@@ -39,7 +39,7 @@ export default {
       path: "/socket.io",
     });
 
-    this.socket = socket;
+    this.$store.commit("setSocket", socket);
   },
 };
 </script>
