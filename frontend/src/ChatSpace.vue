@@ -5,7 +5,9 @@
         <chat-message
           v-for="chatMessage in chatMessages"
           :key="chatMessage.key"
+          :uuid="chatMessage.key"
           :chat-message="chatMessage"
+          ref="messages"
         ></chat-message>
       </div>
     </div>
@@ -28,6 +30,11 @@ export default {
     chatMessages() {
       return this.$store.state.chatMessages;
     },
+  },
+  updated() {
+    if (this.$store.state.chatMessages.length > 0) {
+      this.$refs.messages.slice(-1)[0].$el.scrollIntoView();
+    }
   },
 };
 </script>
