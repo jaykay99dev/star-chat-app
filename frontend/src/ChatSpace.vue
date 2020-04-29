@@ -32,8 +32,14 @@ export default {
     },
   },
   updated() {
-    if (this.$store.state.chatMessages.length > 0) {
-      this.$refs.messages.slice(-1)[0].$el.scrollIntoView();
+    // console.log(this.$store.state.chatMessages.length);
+
+    if (this.$store.state.chatMessages.length > 20) {
+      this.$store.commit("shiftMessage");
+    } else {
+      if (this.$store.state.chatMessages.length > 0) {
+        this.$refs.messages.slice(-1)[0].$el.scrollIntoView();
+      }
     }
   },
 };

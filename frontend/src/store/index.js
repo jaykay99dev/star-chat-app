@@ -48,6 +48,9 @@ export default new Vuex.Store({
     pushMessage: (state, chatMessage) => {
       state.chatMessages.push(chatMessage);
     },
+    shiftMessage: (state) => {
+      state.chatMessages.shift();
+    },
   },
   actions: {},
 });
