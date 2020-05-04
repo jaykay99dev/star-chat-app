@@ -31,6 +31,9 @@ export default {
       return this.$store.state.chatMessages;
     },
   },
+  methods: {
+    notify() {},
+  },
   updated() {
     // console.log(this.$store.state.chatMessages.length);
 
@@ -46,10 +49,17 @@ export default {
 </script>
 
 <style scoped>
+.chat-message {
+  margin-top: 20px;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
 .container {
   display: flex;
   flex-direction: column;
   height: 100%;
+  background: #22416f;
 }
 
 .input-item {

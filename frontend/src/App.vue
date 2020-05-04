@@ -2,7 +2,13 @@
   <div id="layout">
     <a-layout :style="{ minHeight: '100vh' }">
       <a-layout>
-        <a-layout-content>
+        <a-layout-content
+          :style="{
+            'background-image': 'url(http://localhost:3000/background.jpg)',
+            'background-size': 'cover',
+            'background-position': 'center',
+          }"
+        >
           <!-- CONTENT -->
         </a-layout-content>
       </a-layout>
@@ -44,16 +50,4 @@ export default {
 };
 </script>
 
-<style>
-#layout .ant-layout-sider {
-  background: rgba(16, 142, 233, 0.5);
-  color: #fff;
-  line-height: 120px;
-}
-#layout .ant-layout-content {
-  background: gainsboro;
-  color: #fff;
-  min-height: 120px;
-  line-height: 120px;
-}
-</style>
+<style></style>
