@@ -58,6 +58,7 @@ export default {
       this.$notification.open({
         message: this.chatMessage.data.message,
         placement: "topLeft",
+        duration: 0.5,
         // description: "",
         // style: {
         //   width: "600px",
