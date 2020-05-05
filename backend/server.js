@@ -50,6 +50,9 @@ io.on("connection", (socket) => {
 
   // 사용자가 메시지를 보낼 때 수신한다
   socket.on("sendMessage", (userMessage) => {
-    socket.server.emit("receiveMessage", userMessage);
+    // socket.server.emit("receiveMessage", userMessage);
+
+    socket.emit("myMessage", userMessage);
+    socket.broadcast.emit("notMyMessage", userMessage);
   });
 });

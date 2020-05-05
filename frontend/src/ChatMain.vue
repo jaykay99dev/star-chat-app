@@ -51,10 +51,24 @@ export default {
       this.username = "";
     },
     turnOnConnection() {
-      this.$store.state.socket.on("receiveMessage", (userMessage) => {
+      // this.$store.state.socket.on("receiveMessage", (userMessage) => {
+      //   this.$store.commit(
+      //     "pushMessage",
+      //     makeMessageInfo("userMessage", userMessage)
+      //   );
+      // });
+
+      this.$store.state.socket.on("myMessage", (userMessage) => {
         this.$store.commit(
           "pushMessage",
-          makeMessageInfo("userMessage", userMessage)
+          makeMessageInfo("myMessage", userMessage)
+        );
+      });
+
+      this.$store.state.socket.on("notMyMessage", (userMessage) => {
+        this.$store.commit(
+          "pushMessage",
+          makeMessageInfo("notMyMessage", userMessage)
         );
       });
 

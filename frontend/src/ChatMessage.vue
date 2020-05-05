@@ -9,7 +9,7 @@
       <a-alert :message="chatMessage.data.message" type="success" />
     </template> -->
 
-    <template v-if="chatMessage.type === 'userMessage'">
+    <template v-if="chatMessage.type === 'myMessage'">
       <a-row :gutter="24">
         <a-col :span="5">
           <div class="user-area">
@@ -22,6 +22,23 @@
         <a-col :span="19">
           <div class="message-area">
             <p>{{ chatMessage.data.message }}</p>
+          </div>
+        </a-col>
+      </a-row>
+    </template>
+    <template v-else-if="chatMessage.type === 'notMyMessage'">
+      <a-row :gutter="24">
+        <a-col :span="19">
+          <div class="message-area">
+            <p>{{ chatMessage.data.message }}</p>
+          </div>
+        </a-col>
+        <a-col :span="5">
+          <div class="user-area">
+            <div class="img"></div>
+            <div class="username">
+              {{ chatMessage.data.username }}
+            </div>
           </div>
         </a-col>
       </a-row>
