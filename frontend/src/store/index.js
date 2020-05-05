@@ -6,7 +6,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     socket: null,
-    // { username: string }: User
+    // { username: string, background: string }: User
     user: null,
     // { sid: User }
     usersMap: {},

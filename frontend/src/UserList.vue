@@ -11,13 +11,12 @@
         <p>{{ user.username }} (ME)</p>
         <a-list itemLayout="horizontal" :dataSource="users">
           <a-list-item slot="renderItem" slot-scope="user">
-            <a-list-item-meta description="Hello, Chat-App!">
-              <span slot="title">{{ user.username }}</span>
-              <a-avatar
-                slot="avatar"
-                src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-              />
-            </a-list-item-meta>
+            <div class="user-item">
+              <user-avatar :background="user.background"></user-avatar>
+              <div class="username">
+                {{ user.username }}
+              </div>
+            </div>
           </a-list-item>
         </a-list>
       </div>
@@ -27,7 +26,12 @@
 </template>
 
 <script>
+import UserAvatar from "./UserAvatar";
+
 export default {
+  components: {
+    UserAvatar,
+  },
   data() {
     return {
       visible: true,
@@ -58,6 +62,18 @@ export default {
 </script>
 
 <style scoped>
+.user-item {
+  display: flex;
+  width: 100%;
+}
+
+.user-item .username {
+  flex-grow: 1;
+  text-align: center;
+  align-self: center;
+  font-weight: 700;
+}
+
 .menu-btn {
   position: absolute;
   right: -85px;

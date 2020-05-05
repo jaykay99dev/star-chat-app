@@ -39,6 +39,7 @@ io.on("connection", (socket) => {
   socket.on("enterChatApp", (userData) => {
     users[socket.id] = {
       username: userData.username,
+      background: userData.background,
     };
 
     // 다른 사용자들에게 새로운 사용자가 입장했음을 알린다

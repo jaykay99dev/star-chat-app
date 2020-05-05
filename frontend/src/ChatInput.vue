@@ -20,7 +20,8 @@ export default {
   methods: {
     onSearch(value) {
       this.$store.state.socket.emit("sendMessage", {
-        username: this.$store.state.user.username,
+        // username: this.$store.state.user.username,
+        user: this.$store.state.user,
         message: value,
       });
       this.value = "";

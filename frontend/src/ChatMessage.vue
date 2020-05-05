@@ -9,36 +9,26 @@
       <a-alert :message="chatMessage.data.message" type="success" />
     </template> -->
 
-    <template v-if="chatMessage.type === 'myMessage'">
-      <a-row :gutter="24">
-        <a-col :span="5">
+    <template
+      v-if="
+        chatMessage.type === 'myMessage' || chatMessage.type === 'notMyMessage'
+      "
+    >
+      <a-row :gutter="24" type="flex">
+        <a-col :span="5" :order="2">
           <div class="user-area">
-            <div class="img"></div>
+            <!-- <div class="img"></div> -->
+            <user-avatar
+              :background="chatMessage.data.user.background"
+            ></user-avatar>
             <div class="username">
-              {{ chatMessage.data.username }}
+              {{ chatMessage.data.user.username }}
             </div>
           </div>
         </a-col>
-        <a-col :span="19">
+        <a-col :span="19" :order="chatMessage.type === 'myMessage' ? 3 : 1">
           <div class="message-area">
             <p>{{ chatMessage.data.message }}</p>
-          </div>
-        </a-col>
-      </a-row>
-    </template>
-    <template v-else-if="chatMessage.type === 'notMyMessage'">
-      <a-row :gutter="24">
-        <a-col :span="19">
-          <div class="message-area">
-            <p>{{ chatMessage.data.message }}</p>
-          </div>
-        </a-col>
-        <a-col :span="5">
-          <div class="user-area">
-            <div class="img"></div>
-            <div class="username">
-              {{ chatMessage.data.username }}
-            </div>
           </div>
         </a-col>
       </a-row>
@@ -47,7 +37,12 @@
 </template>
 
 <script>
+import UserAvatar from "./UserAvatar";
+
 export default {
+  components: {
+    UserAvatar,
+  },
   props: {
     chatMessage: Object,
   },
@@ -75,13 +70,13 @@ export default {
   margin: 10px;
 }
 
-.user-area .img {
+/* .user-area .img {
   background: white;
   display: inline-block;
   border-radius: 50%;
   width: 50px;
   height: 50px;
-}
+} */
 
 .user-area .username {
   color: white;
