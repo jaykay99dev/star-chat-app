@@ -1,12 +1,14 @@
 <template>
-  <div>
-    <a-input-search
+  <div class="input-container">
+    <a-textarea
+      class="input-area"
       placeholder="메시지를 입력해주세요"
-      @search="onSearch"
-      enterButton="전송"
-      size="large"
+      :autosize="{ maxRows: 6 }"
       v-model="value"
     />
+    <a-button @click="sendMessage" type="primary" class="send-btn">
+      전송
+    </a-button>
   </div>
 </template>
 
@@ -18,14 +20,33 @@ export default {
     };
   },
   methods: {
-    onSearch(value) {
+    sendMessage() {
       this.$store.state.socket.emit("sendMessage", {
-        // username: this.$store.state.user.username,
         user: this.$store.state.user,
-        message: value,
+        message: this.value,
       });
       this.value = "";
     },
   },
 };
 </script>
+
+<style scoped>
+.input-area {
+  border-radius: 0;
+  position: absolute;
+  bottom: 0;
+  resize: none;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  width: 340px;
+}
+
+.send-btn {
+  margin-top: 1px;
+  position: relative;
+  right: -340px;
+  border-radius: 0;
+  height: 39px;
+}
+</style>

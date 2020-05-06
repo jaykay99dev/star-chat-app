@@ -14,6 +14,9 @@
     <div class="input-item">
       <chat-input></chat-input>
     </div>
+    <!-- <div class="input-item">
+      <chat-input></chat-input>
+    </div> -->
   </div>
 </template>
 
@@ -60,6 +63,7 @@ export default {
   flex-direction: column;
   height: 100%;
   background: #22416f;
+  overflow: hidden;
 }
 
 .input-item {
