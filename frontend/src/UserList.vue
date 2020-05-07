@@ -8,7 +8,12 @@
       :mask="false"
     >
       <div>
-        <p>{{ user.username }} (ME)</p>
+        <a-divider style="margin-top: 0;">나</a-divider>
+        <div class="user-item">
+          <user-avatar :background="user.background"></user-avatar>
+          <div class="username">{{ user.username }}</div>
+        </div>
+        <a-divider>다른 사람들</a-divider>
         <a-list itemLayout="horizontal" :dataSource="users">
           <a-list-item slot="renderItem" slot-scope="user">
             <div class="user-item">
