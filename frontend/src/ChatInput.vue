@@ -5,6 +5,9 @@
       placeholder="메시지를 입력해주세요"
       :autosize="{ maxRows: 6 }"
       v-model="value"
+      @keyup="keyup"
+      @keydown.shift="keydownShift"
+      @keydown.enter="keydownEnter"
     />
     <a-tooltip placement="topRight">
       <template slot="title">
@@ -22,9 +25,24 @@ export default {
   data() {
     return {
       value: "",
+      isShiftDown: false,
     };
   },
   methods: {
+    keyup(e) {
+      if (e.key === "Shift") {
+        this.isShiftDown = false;
+      }
+    },
+    keydownShift() {
+      this.isShiftDown = true;
+    },
+    keydownEnter(e) {
+      if (this.isShiftDown) {
+        e.preventDefault();
+        this.sendMessage();
+      }
+    },
     sendMessage() {
       this.$store.state.socket.emit("sendMessage", {
         user: this.$store.state.user,
