@@ -6,9 +6,14 @@
       :autosize="{ maxRows: 6 }"
       v-model="value"
     />
-    <a-button @click="sendMessage" type="primary" class="send-btn">
-      전송
-    </a-button>
+    <a-tooltip placement="topRight">
+      <template slot="title">
+        Shift + Enter
+      </template>
+      <a-button @click="sendMessage" type="primary" class="send-btn">
+        전송
+      </a-button>
+    </a-tooltip>
   </div>
 </template>
 
