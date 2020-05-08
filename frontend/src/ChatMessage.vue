@@ -37,8 +37,13 @@ export default {
     chatMessage: Object,
   },
   computed: {
+    // 보안을 위해서 <, >를 escape하고
+    // 개행문자를 <br/>로 바꿔준다.
     messageHtml() {
-      return this.chatMessage.data.message.split("\n").join("<br/>");
+      return this.chatMessage.data.message
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/\n/g, "<br/>");
     },
   },
   created() {
