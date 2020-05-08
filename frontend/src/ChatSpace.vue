@@ -11,8 +11,18 @@
         ></chat-message>
       </div>
     </div>
+
+    <div class="toggle-container">
+      <a-button
+        @click="toggleChatInput"
+        type="primary"
+        shape="circle"
+        :icon="isChatInputShow ? 'minus' : 'plus'"
+      />
+    </div>
+
     <div class="input-item">
-      <chat-input></chat-input>
+      <chat-input v-show="isChatInputShow"></chat-input>
     </div>
   </div>
 </template>
@@ -26,9 +36,19 @@ export default {
     ChatMessage,
     ChatInput,
   },
+  data() {
+    return {
+      isChatInputShow: true,
+    };
+  },
   computed: {
     chatMessages() {
       return this.$store.state.chatMessages;
+    },
+  },
+  methods: {
+    toggleChatInput() {
+      this.isChatInputShow = !this.isChatInputShow;
     },
   },
   updated() {
@@ -46,6 +66,12 @@ export default {
 </script>
 
 <style scoped>
+.toggle-container {
+  position: absolute;
+  left: -38px;
+  bottom: 4px;
+}
+
 .container {
   display: flex;
   flex-direction: column;

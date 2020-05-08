@@ -33,6 +33,7 @@
       @keydown.enter="keydownEnter"
       ref="messageInput"
     />
+
     <a-tooltip placement="topRight">
       <template slot="title">
         Shift + Enter

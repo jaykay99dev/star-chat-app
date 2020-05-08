@@ -50,4 +50,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+#layout {
+  overflow: hidden;
+}
+</style>
