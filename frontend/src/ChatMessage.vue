@@ -58,7 +58,7 @@ export default {
 
 <style scoped>
 .chat-message {
-  margin: 10px;
+  margin: 20px;
 }
 
 .user-area .username {
