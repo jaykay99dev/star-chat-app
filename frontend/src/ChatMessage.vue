@@ -70,6 +70,8 @@ export default {
   background: white;
   border-radius: 5px;
   padding: 10px;
+  max-height: 125px;
+  overflow-y: auto;
 }
 
 .message-area p {
