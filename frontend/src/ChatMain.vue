@@ -5,6 +5,7 @@
       :maskClosable="false"
       :closable="false"
       :footer="null"
+      :keyboard="false"
     >
       <div>
         <a-input
@@ -16,7 +17,9 @@
           <a-icon slot="prefix" type="user" />
         </a-input>
       </div>
-      <br />
+      <div class="error-message">
+        {{ errorMessage }}
+      </div>
       <div>
         <a-button type="primary" @click="sendUsername">입장하기</a-button>
         <a-button @click="emitEmpty">초기화</a-button>
@@ -32,7 +35,13 @@ export default {
     return {
       visible: false,
       username: "",
+      errorMessage: "",
     };
+  },
+  watch: {
+    username(val) {
+      this.errorMessage = validateUsername(val);
+    },
   },
   methods: {
     sendUsername() {
@@ -97,6 +106,19 @@ export default {
   },
 };
 
+// 사용자 이름을 검증한다
+function validateUsername(username) {
+  if (!username) {
+    return "사용자 이름을 입력해주세요.";
+  }
+
+  if (username.length > 10) {
+    return "사용자 이름은 10자 이하가 되야 합니다.";
+  }
+
+  return "";
+}
+
 function makeMessageInfo(type, data) {
   return {
     key: uuid(),
@@ -143,3 +165,11 @@ function generateGradient() {
   return gradient;
 }
 </script>
+
+<style scoped>
+.error-message {
+  color: red;
+  padding: 5px;
+  padding-bottom: 5px;
+}
+</style>
