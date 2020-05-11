@@ -45,6 +45,12 @@ export default {
   },
   methods: {
     sendUsername() {
+      const errorMessage = validateUsername(this.username);
+      if (errorMessage) {
+        this.errorMessage = errorMessage;
+        return;
+      }
+
       this.visible = false;
       this.$root.isEnter = true;
 
