@@ -46,6 +46,8 @@
 </template>
 
 <script>
+import { debounce } from "./utils";
+
 export default {
   data() {
     return {
@@ -119,24 +121,6 @@ export default {
     },
   },
 };
-
-function debounce(fun, waitTime) {
-  let timeoutId;
-  let callTime = 0;
-
-  return function(...rest) {
-    const now = Date.now();
-
-    if (now < callTime) {
-      clearTimeout(timeoutId);
-    }
-
-    callTime = now + waitTime;
-    timeoutId = setTimeout(() => {
-      fun.call(this, ...rest);
-    }, waitTime);
-  };
-}
 
 // message를 작성 여부, 길이, 개행 횟수로
 // 검증해서 에러 메시지를 반환한다.

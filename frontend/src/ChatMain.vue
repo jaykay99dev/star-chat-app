@@ -29,6 +29,7 @@
 </template>
 <script>
 import uuid from "uuid4";
+import { debounce } from "./utils";
 
 export default {
   data() {
@@ -111,24 +112,6 @@ export default {
     this.visible = true;
   },
 };
-
-function debounce(fun, waitTime) {
-  let timeoutId;
-  let callTime = 0;
-
-  return function(...rest) {
-    const now = Date.now();
-
-    if (now < callTime) {
-      clearTimeout(timeoutId);
-    }
-
-    callTime = now + waitTime;
-    timeoutId = setTimeout(() => {
-      fun.call(this, ...rest);
-    }, waitTime);
-  };
-}
 
 // 사용자 이름을 검증한다
 function validateUsername(username) {
