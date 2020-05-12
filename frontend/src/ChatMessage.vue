@@ -77,6 +77,7 @@ export default {
   padding: 10px;
   max-height: 125px;
   overflow-y: auto;
+  word-break: break-all;
 }
 
 .message-area p {
