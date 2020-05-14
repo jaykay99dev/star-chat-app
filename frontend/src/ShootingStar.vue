@@ -1,14 +1,14 @@
 <template>
-  <transition @before-enter="test" name="hello">
-    <div class="shooting_star"></div>
-  </transition>
+  <div class="shooting_star" @animationend="disappear"></div>
 </template>
 
 <script>
 export default {
   methods: {
-    test() {
-      console.log("Hello");
+    disappear(e) {
+      if (e.animationName.split("-")[0] === "shooting") {
+        this.$emit("disappear");
+      }
     },
   },
 };

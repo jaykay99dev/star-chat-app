@@ -63,11 +63,9 @@ export default {
     message: debounce(function(val) {
       // 실시간 길이 계산
       this.lengthRatio = `${val.length}/70`;
-      //
 
       // 에러 메시지 실시간 생성
       this.errorMessage = validateMessage(val);
-      //
 
       // 에러 메시지 위치 조정
       this.$nextTick(() => {
@@ -75,11 +73,8 @@ export default {
           const pxHeight = this.$refs.messageInput.$el.style.height;
 
           if (pxHeight === this.prevPxHeight) {
-            // console.log("===");
             return;
           }
-
-          // console.log("!==");
 
           this.prevPxHeight = pxHeight;
           this.errorTopPx = `${-pxHeight.slice(0, -2) + 19}px`;
@@ -89,10 +84,15 @@ export default {
     }, 100),
   },
   methods: {
+    sendSignal: debounce(function() {
+      this.$store.state.socket.emit("typeMessage", this.$store.state.user);
+    }, 3000),
     keyup(e) {
       if (e.key === "Shift") {
         this.isShiftDown = false;
       }
+
+      this.sendSignal();
     },
     keydownShift() {
       this.isShiftDown = true;

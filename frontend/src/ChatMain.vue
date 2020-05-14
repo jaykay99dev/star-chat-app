@@ -52,15 +52,10 @@ export default {
         return;
       }
 
-      this.visible = false;
-      this.$root.isEnter = true;
-
       this.turnOnConnection();
 
       const user = { username: this.username, background: generateGradient() };
-
       this.$store.state.socket.emit("enterChatApp", user);
-      this.$store.commit("saveUser", user);
     },
     emitEmpty() {
       this.$refs.usernameInput.focus();
@@ -103,8 +98,12 @@ export default {
         this.$store.commit("deleteUser", sid);
       });
 
-      this.$store.state.socket.on("iCameIn", (usersMap) => {
-        this.$store.commit("saveUsers", usersMap);
+      this.$store.state.socket.on("iCameIn", (data) => {
+        this.$store.commit("saveUsers", data.users);
+        this.$store.commit("saveUser", data.me);
+
+        this.visible = false;
+        this.$root.isEnter = true;
       });
     },
   },

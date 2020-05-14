@@ -6,7 +6,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     socket: null,
-    // { username: string, background: string }: User
+    // { username: string, background: string, sid: string }: User
     user: null,
     // { sid: User }
     usersMap: {},
@@ -44,7 +44,6 @@ export default new Vuex.Store({
     saveUser: (state, user) => {
       state.user = user;
     },
-
     pushMessage: (state, chatMessage) => {
       state.chatMessages.push(chatMessage);
     },

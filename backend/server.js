@@ -38,6 +38,7 @@ io.on("connection", (socket) => {
   // 사용자가 처음 chat-app에 들어올때 수신한다
   socket.on("enterChatApp", (userData) => {
     users[socket.id] = {
+      sid: socket.id,
       username: userData.username,
       background: userData.background,
     };
@@ -45,15 +46,18 @@ io.on("connection", (socket) => {
     // 다른 사용자들에게 새로운 사용자가 입장했음을 알린다
     socket.broadcast.emit("userCameIn", [socket.id, users[socket.id]]);
 
-    // 입장한 사용자에게 사용자 목록을 전송한다
-    socket.emit("iCameIn", users);
+    // 입장한 사용자에게 자신의 데이터와 사용자 목록을 전달한다.
+    socket.emit("iCameIn", { me: users[socket.id], users });
   });
 
   // 사용자가 메시지를 보낼 때 수신한다
   socket.on("sendMessage", (userMessage) => {
-    // socket.server.emit("receiveMessage", userMessage);
-
     socket.emit("myMessage", userMessage);
     socket.broadcast.emit("notMyMessage", userMessage);
+  });
+
+  // 타이핑하는 사용자를 모두에게 전달한다.
+  socket.on("typeMessage", (user) => {
+    socket.server.emit("typeMessage", user);
   });
 });
