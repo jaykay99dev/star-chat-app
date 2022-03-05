@@ -76,7 +76,7 @@ export default {
   display: flex;
   flex-direction: column;
   height: 100%;
-  background: #22416f;
+  background: #f7fafc;
   overflow: hidden;
 }
 

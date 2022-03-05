@@ -11,13 +11,13 @@
             <user-avatar
               :background="chatMessage.data.user.background"
             ></user-avatar>
-            <div class="username">
+            <div class="username" :class="{ 'username--mine': chatMessage.type === 'myMessage' }">
               {{ chatMessage.data.user.username }}
             </div>
           </div>
         </a-col>
         <a-col :span="19" :order="chatMessage.type === 'myMessage' ? 3 : 1">
-          <div class="message-area">
+          <div class="message-area" :style="{ background: chatMessage.type === 'myMessage' ? '#ebf4ff' : null }">
             <p v-html="messageHtml"></p>
           </div>
         </a-col>
@@ -66,18 +66,27 @@ export default {
   margin: 20px;
 }
 
-.user-area .username {
-  color: white;
-  text-align: center;
+.username {
+  color: black;
+  position: absolute;
+  width: 300px;
+  right: 25px;
+  text-align: right;
+}
+
+.username--mine {
+  left: 25px;
+  text-align: left;
 }
 
 .message-area {
-  background: white;
+  background: #ffffff;
   border-radius: 5px;
   padding: 10px;
   max-height: 125px;
   overflow-y: auto;
   word-break: break-all;
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 10%), 0 1px 2px 0 rgb(0 0 0 / 6%);
 }
 
 .message-area p {
