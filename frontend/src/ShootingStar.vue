@@ -22,7 +22,7 @@ export default {
   background: linear-gradient(-45deg, #5f91ff, rgba(0, 0, 255, 0));
   border-radius: 999px;
   filter: drop-shadow(0 0 6px #699bff);
-  animation: tail 1500ms ease-in-out 1, shooting 1500ms ease-in-out 1;
+  animation: tail 3500ms ease-in-out 1, shooting 3500ms ease-in-out 1;
 }
 .shooting_star::before,
 .shooting_star::after {
@@ -39,7 +39,7 @@ export default {
   );
   transform: translateX(50%) rotateZ(45deg);
   border-radius: 100%;
-  animation: shining 1500ms ease-in-out 1;
+  animation: shining 3500ms ease-in-out 1;
 }
 .shooting_star::after {
   transform: translateX(50%) rotateZ(-45deg);

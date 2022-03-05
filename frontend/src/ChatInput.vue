@@ -80,13 +80,12 @@ export default {
           this.errorTopPx = `${-pxHeight.slice(0, -2) + 19}px`;
         }, 17);
       });
-      //
     }, 100),
   },
   methods: {
     sendSignal: debounce(function() {
       this.$store.state.socket.emit("typeMessage", this.$store.state.user);
-    }, 3000),
+    }, 300),
     keyup(e) {
       if (e.key === "Shift") {
         this.isShiftDown = false;
