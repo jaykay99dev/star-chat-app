@@ -12,14 +12,14 @@
       </div>
     </div>
 
-    <div class="toggle-container">
+    <!-- <div class="toggle-container">
       <a-button
         @click="toggleChatInput"
         type="primary"
         shape="circle"
         :icon="isChatInputShow ? 'minus' : 'plus'"
       />
-    </div>
+    </div> -->
 
     <div class="input-item">
       <chat-input v-show="isChatInputShow"></chat-input>
