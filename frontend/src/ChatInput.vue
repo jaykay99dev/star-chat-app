@@ -1,7 +1,7 @@
 <template>
   <div class="input-container">
     <div class="val-result" :style="{ top: errorTopPx }">
-      <div class="length-ratio">
+      <div class="length-ratio" :class="{ 'length-ratio--fail': errorMessage }">
         {{ lengthRatio }}
       </div>
       <div v-if="errorMessage" class="error-message">
@@ -48,12 +48,17 @@
 <script>
 import { debounce } from "./utils";
 
+const ErrorMessageType = {
+  EMPTY_MESSAGE: "메시지를 작성해주세요.",
+  OVER_MESSAGE: "70자 이하가 되야합니다.",
+};
+
 export default {
   data() {
     return {
       message: "",
       isShiftDown: false,
-      errorMessage: "",
+      errorMessage: ErrorMessageType.EMPTY_MESSAGE,
       prevPxHeight: "39px",
       errorTopPx: "-20px",
       lengthRatio: "0/70",
@@ -125,11 +130,11 @@ export default {
 // 검증해서 에러 메시지를 반환한다.
 function validateMessage(message) {
   if (!message) {
-    return "메시지를 작성해주세요.";
+    return ErrorMessageType.EMPTY_MESSAGE;
   }
 
   if (message.length > 70) {
-    return "70자 이하가 되야합니다.";
+    return ErrorMessageType.OVER_MESSAGE;
   }
 
   // if (message.split("\n").length > 5) {
@@ -142,7 +147,11 @@ function validateMessage(message) {
 
 <style scoped>
 .length-ratio {
-  color: white;
+  color: #198754;
+}
+
+.length-ratio--fail {
+  color: #f5222d;
 }
 
 .error-message {
